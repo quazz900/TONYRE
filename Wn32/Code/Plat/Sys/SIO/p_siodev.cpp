@@ -164,10 +164,10 @@ void Device::read_data ( void )
 	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_2] ? (1 << 1) : 0;	// Xbox 'Left Stick Button' = PS2 'Left Stick Button'.
 	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_KP_5] ? (1 << 2) : 0;	// Xbox 'Right Stick Button' = PS2 'Right Stick Button'.
 
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_UP] ? (1 << 4) : 0;	// XBox 'Y' = PS2 'Triangle'.
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_RIGHT] ? (1 << 5) : 0;	// XBox 'B' = PS2 'Circle'.
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_DOWN] ? (1 << 6) : 0;	// XBox 'A' = PS2 'X'.
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_LEFT] ? (1 << 7) : 0;	// XBox 'X' = PS2 'Square'.
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_8] ? (1 << 4) : 0;	// XBox 'Y' = PS2 'Triangle'.
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_6] ? (1 << 5) : 0;	// XBox 'B' = PS2 'Circle'.
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_2] ? (1 << 6) : 0;	// XBox 'A' = PS2 'X'.
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_4] ? (1 << 7) : 0;	// XBox 'X' = PS2 'Square'.
 
 	// Zero out the d-pad pressure values.
 	m_data.m_control_data[8] = 0x00;
@@ -176,22 +176,22 @@ void Device::read_data ( void )
 	m_data.m_control_data[11] = 0x00;
 
 	// Handle 8 position d-pad.
-	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_W] ? (1 << 4) : 0;		// PS2 'DPad Up'.
-	m_data.m_control_data[10] = keystate[SDL_SCANCODE_W] ? 0xFF : 0;			// PS2 'DPad Up'.
+	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_UP] ? (1 << 4) : 0;		// PS2 'DPad Up'.
+	m_data.m_control_data[10] = keystate[SDL_SCANCODE_UP] ? 0xFF : 0;			// PS2 'DPad Up'.
 
-	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_D] ? (1 << 5) : 0;	// PS2 'DPad Right'.
-	m_data.m_control_data[8] = keystate[SDL_SCANCODE_D] ? 0xFF : 0;			// PS2 'DPad Right'.
+	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_RIGHT] ? (1 << 5) : 0;	// PS2 'DPad Right'.
+	m_data.m_control_data[8] = keystate[SDL_SCANCODE_RIGHT] ? 0xFF : 0;			// PS2 'DPad Right'.
 
-	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_S] ? (1 << 6) : 0;	// PS2 'DPad Down'.
-	m_data.m_control_data[11] = keystate[SDL_SCANCODE_S] ? 0xFF : 0;		// PS2 'DPad Down'.
+	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_DOWN] ? (1 << 6) : 0;	// PS2 'DPad Down'.
+	m_data.m_control_data[11] = keystate[SDL_SCANCODE_DOWN] ? 0xFF : 0;		// PS2 'DPad Down'.
 
-	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_A] ? (1 << 7) : 0;	// PS2 'DPad Left'.
-	m_data.m_control_data[9] = keystate[SDL_SCANCODE_A] ? 0xFF : 0;			// PS2 'DPad Left'.
+	m_data.m_control_data[2] ^= keystate[SDL_SCANCODE_LEFT] ? (1 << 7) : 0;	// PS2 'DPad Left'.
+	m_data.m_control_data[9] = keystate[SDL_SCANCODE_LEFT] ? 0xFF : 0;			// PS2 'DPad Left'.
 
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_1] ? (1 << 0) : 0; // PS2 L2
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_3] ? (1 << 1) : 0; // PS2 R2
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_Q] ? (1 << 2) : 0; // PS2 L1
-	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_E] ? (1 << 3) : 0; // PS2 R1
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_7] ? (1 << 0) : 0; // PS2 L2
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_9] ? (1 << 1) : 0; // PS2 R2
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_1] ? (1 << 2) : 0; // PS2 L1
+	m_data.m_control_data[3] ^= keystate[SDL_SCANCODE_KP_3] ? (1 << 3) : 0; // PS2 R1
 
 	// Xbox thumbsticks return analog value in range [-32767, 32767].
 	int up = keystate[SDL_SCANCODE_W] ? 1 : 0;
@@ -199,10 +199,10 @@ void Device::read_data ( void )
 	int down = keystate[SDL_SCANCODE_S] ? 1 : 0;
 	int left = keystate[SDL_SCANCODE_A] ? 1 : 0;
 
-	int rup = keystate[SDL_SCANCODE_KP_8] ? 1 : 0;
-	int rright = keystate[SDL_SCANCODE_KP_6] ? 1 : 0;
-	int rdown = keystate[SDL_SCANCODE_KP_2] ? 1 : 0;
-	int rleft = keystate[SDL_SCANCODE_KP_4] ? 1 : 0;
+	int rup = keystate[SDL_SCANCODE_Z] ? 1 : 0;
+	int rright = keystate[SDL_SCANCODE_X] ? 1 : 0;
+	int rdown = keystate[SDL_SCANCODE_C] ? 1 : 0;
+	int rleft = keystate[SDL_SCANCODE_V] ? 1 : 0;
 
 	m_data.m_control_data[4] = (unsigned char)((0x80 + (rright - rleft) * 0x7F)); // Analog stick right (X direction).
 	m_data.m_control_data[5] = (unsigned char)((0x80 + (rdown - rup) * 0x7F)); // Analog stick right (Y direction).
